@@ -1,0 +1,73 @@
+html,
+body {
+    background-image: url("../../assets/images/bck.jpg");
+}
+p {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.hover {
+    cursor: pointer;
+}
+.show {
+    display: block;
+    transition: opacity 500ms ease;
+}
+.fadeOut {
+    opacity: 0;
+}
+body {
+    font-family: verdana, sans-serif;
+}
+.showcase {
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    .item {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 100%;
+    }
+}
+.animate-show {
+    opacity: 1;
+}
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition: all linear 1s;
+    transition: all linear 1s;
+}
+.animate-show.ng-hide {
+    opacity: 0;
+}
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+}
+.carving {
+    font-family: 'Pacifico', cursive;
+}
+.galleryViewer {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    img.image {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        min-width: 50%;
+        min-height: 50%;
+    }
+}
+.facebook {
+    width: 25px;
+    margin:0px;
+}
