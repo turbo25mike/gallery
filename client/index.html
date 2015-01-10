@@ -16,10 +16,6 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload.css" />
-    <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
-    <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-noscript.css" />
-    <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui-noscript.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -41,7 +37,7 @@
     <div class="container" style="background-color:white;">
         <div ng-view=""></div>
     </div>
-    <div class="navbar-static-bottom navbar-inverse" style="height:30px; margin-top:10px; font-size:12px; ">
+    <div class="navbar-fixed-bottom navbar-inverse" style="height:30px; margin-top:10px; font-size:12px; ">
         <div class="pull-left" style="margin-left:10px; margin-top:0px;">
             <img src="../../assets/images/paypalicon.png" style="width:150px;" alt="Paypal | Visa Mastercard AMEX Discover" />
             </a>
@@ -66,8 +62,6 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-XXXXX-X');
-        ga('send', 'pageview');
     </script>
 
     <!--[if lt IE 9]>
@@ -85,34 +79,11 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/blueimp-tmpl/js/tmpl.js"></script>
-    <script src="bower_components/blueimp-load-image/js/load-image.js"></script>
-    <script src="bower_components/blueimp-load-image/js/load-image-ios.js"></script>
-    <script src="bower_components/blueimp-load-image/js/load-image-orientation.js"></script>
-    <script src="bower_components/blueimp-load-image/js/load-image-meta.js"></script>
-    <script src="bower_components/blueimp-load-image/js/load-image-exif.js"></script>
-    <script src="bower_components/blueimp-load-image/js/load-image-exif-map.js"></script>
-    <script src="bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/cors/jquery.postmessage-transport.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/cors/jquery.xdr-transport.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-jquery-ui.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-angular.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-    <script src="bower_components/jquery-ui/ui/widget.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,client}) app/app.js-- >
-            < script src = "app/app.js" >
-    </script>
+    <!-- build:js({.tmp,client}) app/app.js -->
+    <script src="app/app.js"></script>
     <!-- injector:js -->
     <script src="app/account/account.js"></script>
     <script src="app/account/login/login.controller.js"></script>
@@ -120,7 +91,9 @@
     <script src="app/account/signup/signup.controller.js"></script>
     <script src="app/admin/admin.controller.js"></script>
     <script src="app/admin/admin.js"></script>
-    <script src="app/fadeHelper/fadeHelper.directive.js"></script>
+    <script src="app/appSettings/appSettings.service.js"></script>
+    <script src="app/contact/contact.controller.js"></script>
+    <script src="app/contact/contact.js"></script>
     <script src="app/gallery/gallery.controller.js"></script>
     <script src="app/gallery/gallery.js"></script>
     <script src="app/gallery/gallery.service.js"></script>

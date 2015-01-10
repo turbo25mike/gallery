@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('scottsAppApp')
-    .controller('MainCtrl', function ($scope, $http, $interval) {
+    .controller('MainCtrl', function ($scope, $http, $interval, appSettings) {
+
+        appSettings.GetGoogleID().$promise.then(function (googleID) {
+            ga('create', googleID);
+            ga('send', 'pageview');
+        });
 
         $scope.images = [
             {
@@ -30,14 +35,14 @@ angular.module('scottsAppApp')
                     }
                 ];
 
-  $scope.setSelected = function (selected) {
-      $scope.selectedImage = selected;
-  }; 
+        $scope.setSelected = function (selected) {
+            $scope.selectedImage = selected;
+        };
 
         // Default to a random image.
         $scope.selectedImage = Math.floor(
-                (Math.random() * $scope.images.length * 2) % $scope.images.length
-            );
+            (Math.random() * $scope.images.length * 2) % $scope.images.length
+        );
 
         $interval(function () {
             $scope.selectedImage = Math.floor(

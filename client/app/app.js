@@ -13,6 +13,8 @@ angular.module('scottsAppApp', [
       .otherwise({
         redirectTo: '/'
       });
+    
+   
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');

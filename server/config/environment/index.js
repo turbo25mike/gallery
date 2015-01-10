@@ -46,6 +46,10 @@ var all = {
     clientSecret: process.env.FACEBOOK_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
+    
+  analytics: {
+    googleID: process.env.GOOGLE_ID || 'UA-XXXXX-X'
+  }
 
 };
 
