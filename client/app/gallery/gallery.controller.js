@@ -6,7 +6,7 @@ angular.module('scottsAppApp')
     
     
     $scope.isAdmin = Auth.isAdmin();
-    $scope.galleries = gallery.query();
+    $scope.galleryItems = gallery.query();
     
     $scope.createGallery = function (form){
         $scope.submitted = true;

@@ -55,18 +55,12 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-include="'components/navbar/navbar.html'"></div>
+    <div ng-include="'components/header/header.html'"></div>
     <div class="container" style="background-color:white;">
         <div ng-view=""></div>
     </div>
-    <div class="navbar-fixed-bottom navbar-inverse" style="height:30px; margin-top:10px; font-size:12px; ">
-        <div class="pull-left" style="margin-left:10px; margin-top:0px;">
-            <img src="assets/images/paypalicon.png" style="width:150px;" alt="Paypal | Visa Mastercard AMEX Discover" />
-        </div>
-        <div class="pull-right" style="margin-right:10px; margin-top:5px; color:gray;">
-            &copy; Scotty's Carvings 2015
-        </div>
-    </div>
+    <div ng-include="'components/footer/footer.html'"></div>
+    
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -121,9 +115,9 @@
     <script src="app/main/main.js"></script>
     <script src="components/auth/auth.service.js"></script>
     <script src="components/auth/user.service.js"></script>
+    <script src="components/header/header.controller.js"></script>
     <script src="components/modal/modal.service.js"></script>
     <script src="components/mongoose-error/mongoose-error.directive.js"></script>
-    <script src="components/navbar/navbar.controller.js"></script>
     <!-- endinjector -->
     <!-- endbuild -->
 </body>
