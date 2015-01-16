@@ -3,8 +3,8 @@
 angular.module('scottsAppApp')
     .controller('MainCtrl', function ($scope, $http, $interval, appSettings) {
 
-        appSettings.GetGoogleID().$promise.then(function (googleID) {
-            ga('create', googleID);
+        appSettings.GetGoogleID().$promise.then(function (google) {
+            ga('create', google.id);
             ga('send', 'pageview');
         });
 

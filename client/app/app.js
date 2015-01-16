@@ -6,7 +6,8 @@ angular.module('scottsAppApp', [
   'ngSanitize',
   'ngRoute',
     'ngAnimate',
-  'ui.bootstrap'
+  'ui.bootstrap',
+    'angularFileUpload'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

@@ -1,11 +1,18 @@
 'use strict';
 
 angular.module('scottsAppApp')
-  .controller('HeaderCtrl', function ($scope, $location, Auth) {
+  .controller('HeaderCtrl', function ($scope, $location, Auth, appSettings) {
+    
+    $scope.appName = '';
+    
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
     }];
+    
+    appSettings.GetAppName().$promise.then(function(result){
+            $scope.appName = result.name;
+    });
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

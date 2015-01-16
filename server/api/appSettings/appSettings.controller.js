@@ -56,7 +56,11 @@ exports.destroy = function(req, res) {
 };
 
 exports.googleID = function(req, res){
-     return res.json(config.analytics.googleID);  
+     return res.json({ id : config.analytics.googleID });  
+}
+
+exports.appName = function(req, res){
+     return res.json({name : config.app.name});  
 }
 
 function handleError(res, err) {

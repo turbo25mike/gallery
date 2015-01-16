@@ -8,6 +8,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/googleID', controller.googleID);
+router.get('/appName', controller.appName);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

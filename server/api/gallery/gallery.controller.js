@@ -2,7 +2,26 @@
 
 var _ = require('lodash');
 var Gallery = require('./gallery.model');
-var FS = require('fs');
+var config = require('../../config/environment');
+var cloudinary = require('cloudinary');
+
+cloudinary.config({
+    cloud_name: config.cloudinary.cloud_name,
+    api_key: config.cloudinary.key,
+    api_secret: config.cloudinary.secret
+});
+
+exports.uploadImage = function(req, res){
+    var file = req.files.file;
+    console.log(file.name);
+    console.log(file.type);
+    
+    //cloudinary.uploader.upload(
+      //  req.files.myImage.path,
+        //function (result) {
+          //  console.log(result);
+        //});
+};
 
 // Get list of gallerys
 exports.index = function (req, res) {
@@ -29,6 +48,8 @@ exports.show = function (req, res) {
 
 // Creates a new gallery in the DB.
 exports.create = function (req, res) {
+
+    
 
     Gallery.create(req.body, function (err, gallery) {
         if (err) {

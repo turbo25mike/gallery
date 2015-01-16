@@ -8,6 +8,12 @@ angular.module('scottsAppApp')
                 params: {
                     id: 'googleID'
                 }
+            },
+        GetAppName: {
+                method: 'GET',
+                params: {
+                    id: 'appName'
+                }
             }
         });
   });
