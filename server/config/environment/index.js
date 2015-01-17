@@ -56,7 +56,7 @@ var all = {
     },
 
     cloudinary: {
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'sample',
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'cloud',
         api_key: process.env.CLOUDINARY_KEY || 'key',
         api_secret: process.env.CLOUDINARY_SECRET || 'secret'
     }
