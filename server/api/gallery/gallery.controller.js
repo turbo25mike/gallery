@@ -12,20 +12,10 @@ cloudinary.config({
 });
 
 exports.uploadImage = function(req, res){
-    var file = req.files.file;
-    console.log(file.name);
-    console.log(file.type);
-    console.log(file.path);
-    console.log(config.cloudinary.cloud_name);
     cloudinary.uploader.upload(
-      file.path,
+      req.files.file.path,
     function (result) {
-        var output = '';
-for (var property in result) {
-  output += property + ': ' + result[property]+'; ';
-}
-        
-        console.log('cloudinary results: ' + output);
+        return res.json(200, result);
     });
 };
 

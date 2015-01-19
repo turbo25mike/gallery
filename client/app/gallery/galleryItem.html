@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-8">
+        <img ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + ',': ''}}w_150,h_75,c_fill/{{item.imageID}}.{{item.imageFormat}}" />
+        <h4>{{item.title}}</h4>
+        <p ng-show="isAdmin">Displayed on Home Page: {{item.displayOnHome}}</p>
+        <p>{{item.shortDescription}}</p>
+    </div>
+    <div class="col-md-4">
+        <h2 ng-show="isAdmin">Create a Gallery Item</h2>
+        <form name="form" ng-submit="createGallery(form)" novalidate enctype="multipart/form-data">
+            <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                            'has-error': form.name.$invalid && submitted }">
+                <label>Title</label>
+
+                <input type="text" name="title" class="form-control" ng-model="newGallery.title" required/>
+                <p class="help-block" ng-show="form.title.$error.required && submitted">
+                    A title is required
+                </p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': form.shortDescription.$valid && submitted,
+                                            'has-error': form.shortDescription.$invalid && submitted }">
+                <label>Short Description</label>
+                <input type="text" name="shortDescription" class="form-control" ng-model="newGallery.shortDescription" />
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': form.description.$valid && submitted,
+                                            'has-error': form.description.$invalid && submitted }">
+                <label>Description</label>
+                <input type="text" name="description" class="form-control" ng-model="newGallery.description" />
+            </div>
+
+            <div class="form-group">
+                <div class="direct_upload" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)">
+                    <p>You can also drag and drop an image file into the dashed area.</p>
+
+                    <label>Image:</label>
+                    <button class="btn btn-default" ng-file-select ng-multiple="false" resetOnClick="true" ng-model="files">Select</button>
+                    <h4 ng-show="files">Status</h4>
+                    <div class="file" ng-repeat="file in files">
+                        <img ng-show="file.data" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(newGallery.transformations) ? newGallery.transformations + '/': ''}}{{file.data.public_id}}.{{file.data.format}}" class="thumb" />
+                        <span class="progress" ng-show="file.progress >= 0">						
+					<div style="width:{{file.progress}}%">{{file.progress}}%</div>
+				</span>	
+                        <button class="button" ng-click="file.upload.abort();file.upload.aborted=true" ng-show="file.upload != null && file.progress < 100 && !file.upload.aborted">Abort</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Image Transformations</label>
+                <input type="text" name="transformations" class="form-control" ng-model="newGallery.transformations" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Categories <small>comma seperated</small>
+                </label>
+                <input type="text" name="categories" class="form-control" ng-model="newGallery.categories" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" class="form-control" ng-model="newGallery.quantity" />
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" name="price" class="form-control" ng-model="newGallery.price" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Sale Price</label>
+                <input type="number" name="salePrice" class="form-control" ng-model="newGallery.salePrice" />
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="displayOnHome" ng-model="newGallery.displayOnHome" />Display on Home Page</label>
+
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="active" ng-model="newGallery.active" />Visible to Public
+                </label>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="commissionOnly" ng-model="newGallery.commissionOnly" />Commission Only</label>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

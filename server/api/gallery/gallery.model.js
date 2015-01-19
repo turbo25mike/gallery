@@ -4,17 +4,19 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var GallerySchema = new Schema({
-  name: String,
-  fileName: String,
-  forSale: Boolean,
-  price: Number,
-  displayOnHome: Boolean,
-  width: Number,
-  height: Number,
-  depth: Number,
-  description: String,
-  active: Boolean,
-  category: String
+    title: String,
+    shortDescription: String,
+    description: String,
+    imageID: String,
+    imageFormat: String,
+    transformations: String,
+    price: Number,
+    salePrice: Number,
+    quantity: Number,
+    commissionOnly: Boolean,
+    displayOnHome: Boolean,
+    active: Boolean,
+    category: []
 });
 
 module.exports = mongoose.model('Gallery', GallerySchema);

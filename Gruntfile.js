@@ -5,9 +5,12 @@ module.exports = function (grunt) {
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');
+      
   } catch(e) {
     localConfig = {};
   }
+    
+    
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {

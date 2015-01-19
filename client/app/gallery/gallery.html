@@ -1,69 +1,20 @@
 <div class="row">
     <div class="col-md-2">
-        <div ng-show="galleryItems.resolved && galleryItems.length">
-            <h3>Filter</h3>
+        <div ng-show="galleryItems.$resolved && galleryItems.length">
+            <h3>Filter:</h3>
         </div>
     </div>
-    <div class="col-md-6">
-
-        <div ng-repeat="item in galleryItems">
-            {{item}}
-        </div>
-    </div>
-    <div class="col-md-4" ng-show="isAdmin">
-        <h2>Create a Gallery Item</h2>
-        <div class="form-group">
-            <div class="direct_upload" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)">
-                <p>You can also drag and drop an image file into the dashed area.</p>
-
-                <label>Image:</label>
-                <button class="btn btn-default" ng-file-select ng-multiple="false" resetOnClick="true" ng-model="files">Select</button>
-                <h4 ng-show="files">Status</h4>
-                <div class="file" ng-repeat="file in files">
-                    <img ng-show="file.dataUrl" ng-src="{{file.dataUrl}}" class="thumb" />
-                    <span class="progress" ng-show="file.progress >= 0">						
-					<div style="width:{{file.progress}}%">{{file.progress}}%</div>
-				</span>	
-                    <button class="button" ng-click="file.upload.abort();file.upload.aborted=true" ng-show="file.upload != null && file.progress < 100 && !file.upload.aborted">Abort</button>
-                    {{file.name}} - size: {{file.size}}B - type: {{file.type}}
-
-                    <div class="info">
-                        <table>
-                            <tr ng-repeat="(key, value) in file.result">
-                                <td>{{key}}</td>
-                                <td>{{ value }}</td>
-                            </tr>
-                        </table>
-                    </div>
+    <div class="col-md-10">
+        <div class="row" style="margin-top:10px;">
+            <div ng-show="item.title" class="col-md-3" ng-repeat="item in galleryItems">
+                <div class="well well-sm" ng-click="selected">
+                    <a href="gallery/{{item._id}}"><img ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + ',': ''}}w_180,h_75,c_fill/{{item.imageID}}.{{item.imageFormat}}" class="img-thumbnail" /></a>
+                    <h4>{{item.title}}</h4>
+                    <p ng-show="isAdmin">Displayed on Home Page: {{item.displayOnHome}}</p>
+                    <p>{{item.shortDescription}}</p>
                 </div>
-
             </div>
         </div>
-        <form class="form" name="form" ng-submit="createGallery(form)" novalidate enctype="multipart/form-data">
-
-            <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                            'has-error': form.name.$invalid && submitted }">
-                <label>Name</label>
-
-                <input type="text" name="name" class="form-control" ng-model="newGallery.name" required/>
-                <p class="help-block" ng-show="form.name.$error.required && submitted">
-                    A name is required
-                </p>
-            </div>
-            <div class="form-group" ng-class="{ 'has-success': form.description.$valid && submitted,
-                                            'has-error': form.description.$invalid && submitted }">
-                <label>Description</label>
-
-                <input type="text" name="description" class="form-control" ng-model="newGallery.description" />
-
-            </div>
-
-            <div>
-                <button class="btn btn-inverse btn-lg btn-login" type="submit">
-                    Create
-                </button>
-
-            </div>
-        </form>
     </div>
+    
 </div>

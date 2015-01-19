@@ -1,12 +1,9 @@
 'use strict';
 
 angular.module('scottsAppApp')
-    .controller('MainCtrl', function ($scope, $http, $interval, appSettings) {
+    .controller('MainCtrl', function ($scope, $http, $interval) {
 
-        appSettings.GetGoogleID().$promise.then(function (google) {
-            ga('create', google.id);
-            ga('send', 'pageview');
-        });
+        
 
         $scope.images = [
             {
