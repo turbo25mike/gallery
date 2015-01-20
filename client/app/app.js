@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('scottsAppApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ngRoute',
     'ngAnimate',
-  'ui.bootstrap',
-    'angularFileUpload'
+    'ui.bootstrap',
+    'angularFileUpload',
+    'toastr'
 ])
     .config(function ($routeProvider, $locationProvider, $httpProvider, appSettingsProvider) {
         $routeProvider

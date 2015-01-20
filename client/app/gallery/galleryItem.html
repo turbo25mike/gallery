@@ -1,18 +1,21 @@
 <div class="row">
-    <div class="col-md-8">
-        <img ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + ',': ''}}w_150,h_75,c_fill/{{item.imageID}}.{{item.imageFormat}}" />
-        <h4>{{item.title}}</h4>
-        <p ng-show="isAdmin">Displayed on Home Page: {{item.displayOnHome}}</p>
-        <p>{{item.shortDescription}}</p>
+    <div class="col-md-8" style="padding-top:10px;">
+       <button type="button" class="btn btn-danger" ng-click="deleteItem()">Delete</button>
+        <h3 ng-hide="itemFound">Gallery Item not found.</h3>
+        <img ng-show="item" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + '/': ''}}{{item.imageID}}.{{item.imageFormat}}" />
     </div>
-    <div class="col-md-4">
-        <h2 ng-show="isAdmin">Create a Gallery Item</h2>
-        <form name="form" ng-submit="createGallery(form)" novalidate enctype="multipart/form-data">
+    <div class="col-md-4"  style="padding-top:10px;">
+        <div ng-hide="isAdmin">
+            <h4>{{item.title}}</h4>
+            <p>{{item.description}}</p>
+        </div>
+        <h2 ng-show="isAdmin && isNew">Create a Gallery Item</h2>
+        <form ng-show="isAdmin" name="form" ng-submit="createGallery(form)" novalidate enctype="multipart/form-data">
             <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
                 <label>Title</label>
 
-                <input type="text" name="title" class="form-control" ng-model="newGallery.title" required/>
+                <input type="text" name="title" class="form-control" ng-model="item.title" required/>
                 <p class="help-block" ng-show="form.title.$error.required && submitted">
                     A title is required
                 </p>
@@ -21,13 +24,13 @@
             <div class="form-group" ng-class="{ 'has-success': form.shortDescription.$valid && submitted,
                                             'has-error': form.shortDescription.$invalid && submitted }">
                 <label>Short Description</label>
-                <input type="text" name="shortDescription" class="form-control" ng-model="newGallery.shortDescription" />
+                <input type="text" name="shortDescription" class="form-control" ng-model="item.shortDescription" />
             </div>
 
             <div class="form-group" ng-class="{ 'has-success': form.description.$valid && submitted,
                                             'has-error': form.description.$invalid && submitted }">
                 <label>Description</label>
-                <input type="text" name="description" class="form-control" ng-model="newGallery.description" />
+                <textarea rows="5" name="description" class="form-control" ng-model="item.description"></textarea>
             </div>
 
             <div class="form-group">
@@ -38,7 +41,7 @@
                     <button class="btn btn-default" ng-file-select ng-multiple="false" resetOnClick="true" ng-model="files">Select</button>
                     <h4 ng-show="files">Status</h4>
                     <div class="file" ng-repeat="file in files">
-                        <img ng-show="file.data" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(newGallery.transformations) ? newGallery.transformations + '/': ''}}{{file.data.public_id}}.{{file.data.format}}" class="thumb" />
+                        <img ng-show="file.data" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + '/': ''}}{{file.data.public_id}}.{{file.data.format}}" class="thumb" />
                         <span class="progress" ng-show="file.progress >= 0">						
 					<div style="width:{{file.progress}}%">{{file.progress}}%</div>
 				</span>	
@@ -49,56 +52,54 @@
             </div>
 
             <div class="form-group">
-                <label>Image Transformations</label>
-                <input type="text" name="transformations" class="form-control" ng-model="newGallery.transformations" />
+                <label><a href="http://cloudinary.com/documentation/image_transformations#reference" target="_blank">Image Transformations</a> <small>(comma seperated)</small></label>
+                <input type="text" name="transformations" class="form-control" ng-model="item.transformations" />
             </div>
 
 
             <div class="form-group">
-                <label>Categories <small>comma seperated</small>
+                <label>Categories <small>(comma seperated)</small>
                 </label>
-                <input type="text" name="categories" class="form-control" ng-model="newGallery.categories" />
+                <input type="text" name="categoriesString" class="form-control" ng-model="item.categoriesString" />
             </div>
 
 
             <div class="form-group">
                 <label>Quantity</label>
-                <input type="number" name="quantity" class="form-control" ng-model="newGallery.quantity" />
+                <input type="number" name="quantity" class="form-control" ng-model="item.quantity" />
             </div>
 
             <div class="form-group">
                 <label>Price</label>
-                <input type="number" name="price" class="form-control" ng-model="newGallery.price" />
+                <input type="number" name="price" class="form-control" ng-model="item.price" />
             </div>
 
 
             <div class="form-group">
                 <label>Sale Price</label>
-                <input type="number" name="salePrice" class="form-control" ng-model="newGallery.salePrice" />
+                <input type="number" name="salePrice" class="form-control" ng-model="item.salePrice" />
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="displayOnHome" ng-model="newGallery.displayOnHome" />Display on Home Page</label>
-
+                    <input type="checkbox" name="displayOnHome" ng-model="item.displayOnHome" />Display on Home Page</label>
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="active" ng-model="newGallery.active" />Visible to Public
-                </label>
+                    <input type="checkbox" name="active" ng-model="item.active" />Visible to Public</label>
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="commissionOnly" ng-model="newGallery.commissionOnly" />Commission Only</label>
+                    <input type="checkbox" name="commissionOnly" ng-model="item.commissionOnly" />Commission Only</label>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">
-                    Create
-                </button>
+                <button class="btn btn-primary" type="submit">Save</button>
             </div>
         </form>
+        <br />
+        <br />
     </div>
 </div>

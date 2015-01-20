@@ -9,6 +9,7 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/home', controller.homeGallery);
 router.get('/:id', controller.show);
 router.post('/upload', multipartyMiddleware, auth.isAuthenticated(), controller.uploadImage);
 router.post('/', auth.isAuthenticated(), controller.create);

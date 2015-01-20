@@ -1,50 +1,23 @@
 'use strict';
 
 angular.module('scottsAppApp')
-    .controller('MainCtrl', function ($scope, $http, $interval) {
+    .controller('MainCtrl', function ($scope, $http, $interval, gallery) {
 
-        
+        $scope.images = gallery.getHome();
+        $scope.images.$promise.then(function () {
+            // Default to a random image.
+            $scope.selectedImage = Math.floor(
+                (Math.random() * $scope.images.length * 2) % $scope.images.length
+            );
 
-        $scope.images = [
-            {
-                source: "assets/images/bear_1.jpg",
-                title: "What are you smirking about?"
-                    },
-            {
-                source: "assets/images/cougar_1.jpg",
-                title: "No makeup - no problem."
-                    },
-            {
-                source: "assets/images/indian_1.jpg",
-                title: "Grace and beauty."
-                    },
-            {
-                source: "assets/images/lumberjack_1.jpg",
-                title: "Another smirk."
-                    },
-            {
-                source: "assets/images/sass_1.jpg",
-                title: "What are you looking at?"
-                    },
-            {
-                source: "assets/images/seahawks_1.jpg",
-                title: "Saddness."
-                    }
-                ];
+            $interval(function () {
+                $scope.selectedImage = Math.floor(
+                    (Math.random() * $scope.images.length * 2) % $scope.images.length
+                );
+            }, 5000);
+        });
 
         $scope.setSelected = function (selected) {
             $scope.selectedImage = selected;
         };
-
-        // Default to a random image.
-        $scope.selectedImage = Math.floor(
-            (Math.random() * $scope.images.length * 2) % $scope.images.length
-        );
-
-        $interval(function () {
-            $scope.selectedImage = Math.floor(
-                (Math.random() * $scope.images.length * 2) % $scope.images.length
-            );
-        }, 5000);
-
     });

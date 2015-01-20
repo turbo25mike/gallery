@@ -23,6 +23,13 @@ angular.module('scottsAppApp')
                 params: {
                     id: '@_id'
                 }
+            },
+            getHome: {
+                method: 'GET',
+                params: {
+                    id: 'home'
+                },
+                isArray: true
             }
         });
   });

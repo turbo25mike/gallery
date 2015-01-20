@@ -42,6 +42,19 @@ exports.show = function (req, res) {
     });
 };
 
+// Get a homepage gallery
+exports.homeGallery = function (req, res) {
+    Gallery.find({'displayOnHome': true}, function (err, gallery) {
+        if (err) {
+            return handleError(res, err);
+        }
+        if (!gallery) {
+            return res.send(404);
+        }
+        return res.json(gallery);
+    });
+};
+
 // Creates a new gallery in the DB.
 exports.create = function (req, res) {
 
