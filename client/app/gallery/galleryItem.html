@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8" style="padding-top:10px;">
-       <button type="button" class="btn btn-danger" ng-click="deleteItem()">Delete</button>
+       
         <h3 ng-hide="itemFound">Gallery Item not found.</h3>
         <img ng-show="item" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + '/': ''}}{{item.imageID}}.{{item.imageFormat}}" />
     </div>
@@ -9,6 +9,8 @@
             <h4>{{item.title}}</h4>
             <p>{{item.description}}</p>
         </div>
+        
+        
         <h2 ng-show="isAdmin && isNew">Create a Gallery Item</h2>
         <form ng-show="isAdmin" name="form" ng-submit="createGallery(form)" novalidate enctype="multipart/form-data">
             <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
@@ -97,6 +99,7 @@
 
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Save</button>
+                <button type="button" class="btn btn-danger" ng-show="isAdmin" ng-click="deleteItem()">Delete</button>
             </div>
         </form>
         <br />

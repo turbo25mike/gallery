@@ -39,8 +39,8 @@ angular.module('scottsAppApp')
         $scope.createGallery = function (form) {
             $scope.submitted = true;
 
-            if ($scope.item.imageID || $scope.item.imageFormat) {
-                toastr.error('image not found');
+            if (!$scope.item.imageID || !$scope.item.imageFormat) {
+                return;
             }
 
             if (form.$valid && Auth.isAdmin()) {

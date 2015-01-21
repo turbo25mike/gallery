@@ -3,8 +3,8 @@
         <h1 class="carving">{{images[selectedImage].title}}</h1>
         <p>{{images[selectedImage].shortDescription}}</p>
         <div class="showcase">
-            <a href="#" data-ng-repeat="image in images" ng-show="selectedImage==$index" class="animate-show">
-                <img class="item" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(image.transformations) ? item.transformations + ',': ''}}w_180,h_75,c_fill/{{image.imageID}}.{{image.imageFormat}}" title="{{ image.title }}" />
+            <a href="gallery/{{image._id}}" data-ng-repeat="image in images" ng-show="selectedImage==$index" class="animate-show">
+                <img class="item" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(image.transformations) ? item.transformations + '/': ''}}{{image.imageID}}.{{image.imageFormat}}" title="{{ image.title }}" />
             </a>
         </div>
         <div class="row" style="margin-bottom:20px;">
