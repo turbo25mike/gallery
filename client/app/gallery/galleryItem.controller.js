@@ -1,3 +1,4 @@
+/* jshint camelcase: false */
 'use strict';
 
 angular.module('scottsAppApp')
@@ -15,7 +16,7 @@ angular.module('scottsAppApp')
             $scope.item = gallery.get({
                 id: $routeParams.id
             });
-            $scope.item.$promise.then(function (result) {
+            $scope.item.$promise.then(function () {
                 $scope.item.categoriesString = $scope.item.category.toString();
                 $scope.itemFound = true;
             });
@@ -27,7 +28,7 @@ angular.module('scottsAppApp')
                     gallery.delete({
                             id: $scope.item._id
                         },
-                        function (success) {
+                        function () {
                             toastr.success('Item removed successfully');
                             $location.path('gallery');
                         });
@@ -63,12 +64,12 @@ angular.module('scottsAppApp')
 
                 if ($scope.item._id) {
                     gallery.update(saveData,
-                        function (data) {
+                        function () {
                             toastr.success('Item Saved.');
                         });
                 } else {
                     gallery.save(saveData,
-                        function (data) {
+                        function () {
                             toastr.success('Item Saved.');
                         });
                 }
@@ -76,19 +77,21 @@ angular.module('scottsAppApp')
         };
 
         $scope.$watch('files', function () {
-            if (!$scope.files) return;
+            if (!$scope.files) {
+                return;
+            }
             $scope.files.forEach(function (file) {
                 $scope.upload = $upload.upload({
-                    url: "api/gallery/upload",
+                    url: 'api/gallery/upload',
                     data: {},
                     file: file
                 }).progress(function (e) {
                     file.progress = Math.round((e.loaded * 100.0) / e.total);
-                    file.status = "Uploading... " + file.progress + "%";
+                    file.status = 'Uploading... ' + file.progress + '%';
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
-                }).success(function (data, status, headers, config) {
+                }).success(function (data) {
                     $scope.item.imageID = data.public_id;
                     $scope.item.imageFormat = data.format;
                     file.data = data;
@@ -99,9 +102,9 @@ angular.module('scottsAppApp')
         $scope.dragOverClass = function ($event) {
             var items = $event.dataTransfer.items;
             var hasFile = false;
-            if (items != null) {
+            if (items !== null) {
                 for (var i = 0; i < items.length; i++) {
-                    if (items[i].kind == 'file') {
+                    if (items[i].kind === 'file') {
                         hasFile = true;
                         break;
                     }
@@ -109,6 +112,6 @@ angular.module('scottsAppApp')
             } else {
                 hasFile = true;
             }
-            return hasFile ? "dragover" : "dragover-err";
+            return hasFile ? 'dragover' : 'dragover-err';
         };
     });

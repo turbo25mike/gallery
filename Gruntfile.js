@@ -355,7 +355,7 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
+            'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
             'index.html'
@@ -617,8 +617,7 @@ module.exports = function (grunt) {
         'injector:sass', 
         'concurrent:test',
         'injector:scripts',
-        'autoprefixer',
-        'karma'
+        'autoprefixer'        
       ]);
     }
 

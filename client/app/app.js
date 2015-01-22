@@ -15,9 +15,17 @@ angular.module('scottsAppApp', [
             .otherwise({
                 redirectTo: '/'
             });
+    
+        window.fbAsyncInit = function () {
+            window.FB.init({
+                appId: appSettingsProvider.facebookID,
+                xfbml: true,
+                version: 'v2.2'
+            });
+        };
 
-        ga('create', appSettingsProvider.googleID);
-        ga('send', 'pageview');
+        window.ga('create', appSettingsProvider.googleID);
+        window.ga('send', 'pageview');
 
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor');

@@ -1,16 +1,16 @@
 <div class="row">
     <div class="col-md-8" style="padding-top:10px;">
-       
+
         <h3 ng-hide="itemFound">Gallery Item not found.</h3>
         <img ng-show="item" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + '/': ''}}{{item.imageID}}.{{item.imageFormat}}" />
     </div>
-    <div class="col-md-4"  style="padding-top:10px;">
+    <div class="col-md-4" style="padding-top:10px;">
         <div ng-hide="isAdmin">
             <h4>{{item.title}}</h4>
             <p>{{item.description}}</p>
         </div>
-        
-        
+
+
         <h2 ng-show="isAdmin && isNew">Create a Gallery Item</h2>
         <form ng-show="isAdmin" name="form" ng-submit="createGallery(form)" novalidate enctype="multipart/form-data">
             <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
@@ -43,18 +43,17 @@
                     <button class="btn btn-default" ng-file-select ng-multiple="false" resetOnClick="true" ng-model="files">Select</button>
                     <h4 ng-show="files">Status</h4>
                     <div class="file" ng-repeat="file in files">
-                        <img ng-show="file.data" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + '/': ''}}{{file.data.public_id}}.{{file.data.format}}" class="thumb" />
-                        <span class="progress" ng-show="file.progress >= 0">						
-					<div style="width:{{file.progress}}%">{{file.progress}}%</div>
-				</span>	
+                        <div class="progress" ng-show="file.progress >= 0">
+                            <div style="width:{{file.progress}}%">{{file.progress}}%</div>
+                        </div>
                         <button class="button" ng-click="file.upload.abort();file.upload.aborted=true" ng-show="file.upload != null && file.progress < 100 && !file.upload.aborted">Abort</button>
-
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label><a href="http://cloudinary.com/documentation/image_transformations#reference" target="_blank">Image Transformations</a> <small>(comma seperated)</small></label>
+                <label><a href="http://cloudinary.com/documentation/image_transformations#reference" target="_blank">Image Transformations</a>  <small>(comma seperated)</small>
+                </label>
                 <input type="text" name="transformations" class="form-control" ng-model="item.transformations" />
             </div>
 
