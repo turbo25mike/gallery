@@ -154,6 +154,14 @@ module.exports = function (grunt) {
         ]
       }
     },
+      
+      eol: {
+    default_options: {
+      files: {
+        '<%= yeoman.client %>/index.html': ['<%= yeoman.client %>/index.html']
+      }
+    }
+  },
 
     // Empties folders to start fresh
     clean: {
@@ -485,11 +493,11 @@ module.exports = function (grunt) {
 
     injector: {
       options: {
-
       },
       // Inject application script files into index.html (doesn't include bower)
       scripts: {
         options: {
+            
           transform: function(filePath) {
             filePath = filePath.replace('/client/', '');
             filePath = filePath.replace('/.tmp/', '');
@@ -497,6 +505,7 @@ module.exports = function (grunt) {
           },
           starttag: '<!-- injector:js -->',
           endtag: '<!-- endinjector -->'
+            
         },
         files: {
           '<%= yeoman.client %>/index.html': [
@@ -643,6 +652,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
+      'eol',
     'clean:dist',
     'injector:sass', 
     'concurrent:dist',
