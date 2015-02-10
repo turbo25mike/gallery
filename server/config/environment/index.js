@@ -44,7 +44,8 @@ var all = {
     facebook: {
         clientID: process.env.FACEBOOK_ID || 'id',
         clientSecret: process.env.FACEBOOK_SECRET || 'secret',
-        callbackURL: (process.env.DOMAIN || '') + '/auth/facebook/callback'
+        callbackURL: (process.env.DOMAIN || '') + '/auth/facebook/callback',
+        page: (process.env.FACEBOOK_PAGE_URL || 'http://facebook.com')
     },
 
     analytics: {
@@ -52,13 +53,23 @@ var all = {
     },
 
     app: {
-        name: process.env.APP_NAME || 'My App'
+        name: process.env.APP_NAME || 'My App',
+        no_reply_email: process.env.APP_NO_REPLY_EMAIL || 'donotreply@myapp.com',
+        contact_email: process.env.APP_CONTACT_EMAIL || 'contact@myapp.com'
     },
 
     cloudinary: {
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'cloud',
         api_key: process.env.CLOUDINARY_KEY || 'key',
         api_secret: process.env.CLOUDINARY_SECRET || 'secret'
+    },
+    
+    postmark: {
+      api_key: process.env.POSTMARK_KEY || 'key'  
+    },
+    
+    paypal: {
+        merchantID: process.env.PAYPAL_MERCHANT_ID || 'id'   
     }
 
 };

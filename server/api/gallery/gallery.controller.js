@@ -12,9 +12,12 @@ cloudinary.config({
 });
 
 exports.uploadImage = function(req, res){
+    console.log(config.cloudinary.cloud_name + ':' + config.cloudinary.api_key + ':' + config.cloudinary.api_secret);
+    console.log('file path: ' + req.files.file.path);
     cloudinary.uploader.upload(
       req.files.file.path,
     function (result) {
+        console.log(result);
         return res.json(200, result);
     });
 };
