@@ -4,10 +4,11 @@
 angular.module('scottsAppApp')
     .controller('GalleryItemCtrl', function ($scope, $routeParams, $location, gallery, Auth, $upload, appSettings, toastr, confirmationModal) {
 
+
         $scope.appSettings = appSettings;
         $scope.isAdmin = Auth.isAdmin();
         $scope.itemFound = false;
-        $scope.item = {};
+        $scope.item = { images: []};
 
         if ($routeParams.id === 'new') {
             $scope.isNew = true;
@@ -16,8 +17,9 @@ angular.module('scottsAppApp')
             $scope.item = gallery.get({
                 id: $routeParams.id
             });
+
             $scope.item.$promise.then(function () {
-                $scope.item.categoriesString = $scope.item.category.toString();
+                $scope.item.categoriesString = ($scope.item.category) ? $scope.item.category.toString() : '';
                 $scope.itemFound = true;
             });
         }
@@ -40,7 +42,7 @@ angular.module('scottsAppApp')
         $scope.createGallery = function (form) {
             $scope.submitted = true;
 
-            if (!$scope.item.imageID || !$scope.item.imageFormat) {
+            if (!$scope.item.images || $scope.item.images.length < 1) {
                 return;
             }
 
@@ -50,9 +52,6 @@ angular.module('scottsAppApp')
                     title: form.title.$modelValue,
                     shortDescription: form.shortDescription.$modelValue,
                     description: form.description.$modelValue,
-                    imageID: $scope.item.imageID,
-                    imageFormat: $scope.item.imageFormat,
-                    transformations: form.transformations.$modelValue,
                     price: form.price.$modelValue,
                     salePrice: form.salePrice.$modelValue,
                     quantity: form.quantity.$modelValue,
@@ -92,9 +91,16 @@ angular.module('scottsAppApp')
                         $scope.$apply();
                     }
                 }).success(function (data) {
-                    $scope.item.imageID = data.public_id;
-                    $scope.item.imageFormat = data.format;
-                    file.data = data;
+                    if(!data.error){
+                    $scope.item.images.push({
+                        id: data.public_id,
+                        format: data.format,
+                        order: $scope.item.images.length
+                    });
+                    }else{
+                        file.error = true;
+                     toastr.error("failed to upload [" + file.name + "] error: " + data.error.code);   
+                    }
                 });
             });
         });

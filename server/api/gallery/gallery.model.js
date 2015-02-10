@@ -7,13 +7,16 @@ var GallerySchema = new Schema({
     title: String,
     shortDescription: String,
     description: String,
-    imageID: String,
-    imageFormat: String,
-    transformations: String,
+    images: [{ 
+        id: String, 
+        format: String,
+        transformations: String,
+        order: Number,
+        mainView: Boolean
+    }],
     price: Number,
     salePrice: Number,
     quantity: Number,
-    commissionOnly: Boolean,
     displayOnHome: Boolean,
     active: Boolean,
     category: []

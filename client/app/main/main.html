@@ -9,12 +9,18 @@
         </div>
         <div class="row" style="margin-bottom:20px;">
             <div class="col-md-8">
-                <p>{{images[selectedImage].description}}</p>
+                
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div id="fb-root"></div>
-        <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-width="350" data-numposts="3" data-colorscheme="light"></div>
+     <div style="margin-top:10px;">
+      <p>Description: {{images[selectedImage].description}}</p>
+         </div>
+         <h4 ng-show="images[selectedImage].price && !images[selectedImage].salePrice" >Available Now: ${{images[selectedImage].price}}</h4>
+            <h3 ng-show="images[selectedImage].salePrice" >Sale: ${{images[selectedImage].salePrice}} <br /><small>reg: ${{images[selectedImage].price}}</small></h3>
+            <paypal item="images[selectedImage]"></paypal>
+      <hr />
+       <facebook></facebook>
     </div>
 </div>

@@ -3,7 +3,8 @@
 angular.module('scottsAppApp')
     .controller('MainCtrl', function ($scope, $http, $interval, gallery, appSettings) {
 
-    $scope.appSettings = appSettings;
+        $scope.appSettings = appSettings;
+
         $scope.images = gallery.getHome();
         $scope.images.$promise.then(function () {
             // Default to a random image.
