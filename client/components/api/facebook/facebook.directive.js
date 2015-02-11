@@ -5,7 +5,7 @@ angular.module('scottsAppApp')
         return {
             template: '<div ng-bind-html="apiScript"></div>',
             restrict: 'EA',
-            link: function (scope, element, attrs) {
+            link: function (scope) {
                 appSettings.$promise.then(function () {
                     var script = '<div id="fb-root"></div>' +
                         '<script>(function(d, s, id) {' +

@@ -16,10 +16,10 @@ angular.module('scottsAppApp')
                 $scope.disabled = true;
                 contact.send(
                     $scope.user,
-                    function (scss) {
+                    function () {
                         toastr.success('Your message has been sent.');
                     },
-                    function (err) {
+                    function () {
                         toastr.error('Your message failed to send.');
                     }
                 );
