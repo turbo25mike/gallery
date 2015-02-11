@@ -40,6 +40,16 @@ var all = {
             }
         }
     },
+    
+    app: {
+        name: process.env.APP_NAME || 'My App'
+    },
+
+    cloudinary: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'cloud',
+        api_key: process.env.CLOUDINARY_KEY || 'key',
+        api_secret: process.env.CLOUDINARY_SECRET || 'secret'
+    },
 
     facebook: {
         clientID: process.env.FACEBOOK_ID || 'id',
@@ -48,28 +58,17 @@ var all = {
         page: (process.env.FACEBOOK_PAGE_URL || 'http://facebook.com')
     },
 
-    analytics: {
-        googleID: process.env.GOOGLE_ID || 'UA-XXXXX-X'
-    },
-
-    app: {
-        name: process.env.APP_NAME || 'My App',
-        no_reply_email: process.env.APP_NO_REPLY_EMAIL || 'donotreply@myapp.com',
-        contact_email: process.env.APP_CONTACT_EMAIL || 'contact@myapp.com'
-    },
-
-    cloudinary: {
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'cloud',
-        api_key: process.env.CLOUDINARY_KEY || 'key',
-        api_secret: process.env.CLOUDINARY_SECRET || 'secret'
-    },
-    
-    postmark: {
-      api_key: process.env.POSTMARK_KEY || 'key'  
+    google: {
+        analytics_id: process.env.GOOGLE_ANALYTICS_ID || 'UA-XXXXX-X',
+        map_id: process.env.GOOGLE_MAP_ID || 'mapID'        
     },
     
     paypal: {
         merchantID: process.env.PAYPAL_MERCHANT_ID || 'id'   
+    },
+    
+    postmark: {
+      api_key: process.env.POSTMARK_KEY || 'key'  
     }
 
 };

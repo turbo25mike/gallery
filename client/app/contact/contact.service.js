@@ -1,27 +1,25 @@
 'use strict';
 
 angular.module('scottsAppApp')
-    .factory('User', function ($resource) {
-        return $resource('/api/users/:id/:controller', {
+  .service('contact', function ($resource) {
+    return $resource('/api/contact/:id/', {
             id: '@_id'
         }, {
-            changePassword: {
+            update: {
                 method: 'PUT',
                 params: {
-                    controller: 'password'
                 }
             },
             get: {
                 method: 'GET',
                 params: {
-                    id: 'me'
+                    id: '@_id'
                 }
             },
-            changeRole: {
-                method: 'PUT',
+            send: {
+                method: 'POST',
                 params: {
-                    controller: 'role'
                 }
             }
         });
-    });
+  });

@@ -4,7 +4,7 @@
         <p>{{images[selectedImage].shortDescription}}</p>
         <div class="showcase">
             <a href="gallery/{{image._id}}" data-ng-repeat="image in images" ng-show="selectedImage==$index" class="animate-show">
-                <img class="item" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(image.transformations) ? image.transformations + '/': ''}}{{image.imageID}}.{{image.imageFormat}}" title="{{ image.title }}" />
+                <img class="item" ng-src="{{::image.primaryImage}}" title="{{ image.title }}" />
             </a>
         </div>
         <div class="row" style="margin-bottom:20px;">

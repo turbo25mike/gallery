@@ -79,6 +79,19 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+exports.changeRole = function(req, res, next) {
+  User.findById(req.body._id, function (err, user) {
+      if (err) return validationError(res, err);
+      user.role = req.body.role;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+      
+      res.send(200);
+  });
+};
+
 /**
  * Get my info
  */

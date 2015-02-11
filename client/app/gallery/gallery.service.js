@@ -9,13 +9,11 @@ angular.module('scottsAppApp')
             create: {
                 method: 'POST',
                 params: {
-                    controller: 'password'
                 }
             },
             update: {
                 method: 'PUT',
                 params: {
-                    controller: 'password'
                 }
             },
             get: {

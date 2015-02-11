@@ -27,7 +27,7 @@
             <div ng-show="item.title" class="col-md-3" ng-repeat="item in galleryItems | filter: search">
                 <div class="well well-sm" ng-click="selected">
                     <a href="gallery/{{item._id}}">
-                        <img ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(item.transformations) ? item.transformations + ',': ''}}w_180,h_75,c_fill/{{item.imageID}}.{{item.imageFormat}}" class="img-thumbnail" />
+                        <img src="{{::cloudinary.getPrimaryImage(item, appSettings)}}" class="img-thumbnail" />
                     </a>
                     <h4>{{item.title}}</h4>
                     <p ng-show="isAdmin">Displayed on Home Page: {{item.displayOnHome}}</p>

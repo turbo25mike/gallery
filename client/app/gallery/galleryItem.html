@@ -1,36 +1,45 @@
 <div class="row">
     <div class="col-md-8" style="padding-top:10px;">
-       
-       <div class="form-group"  ng-show="isAdmin">
-                <div class="direct_upload" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)">
-                    <h4>You can also drag and drop images into the dashed area.</h4>
 
-                    <label>Images:</label>
-                    <button class="btn btn-default" ng-file-select ng-multiple="true" resetOnClick="true" ng-model="files">Select</button>
-                    <h4 ng-show="files">Status</h4>
-                    <div class="file" ng-repeat="file in files">
-                        <small>{{file.name}}</small>
-                        <div class="progress" ng-show="file.progress >= 0">
-                            <div class="progress-bar" ng-class="{'progress-bar-danger': file.error}" style="width:{{file.progress}}%">{{file.progress}}%</div>
-                        </div>
-                        <button class="button" ng-click="file.upload.abort();file.upload.aborted=true" ng-show="file.upload != null && file.progress < 100 && !file.upload.aborted">Abort</button>
+        <div class="form-group" ng-show="isAdmin">
+            <div class="direct_upload" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)">
+                <h4>You can also drag and drop images into the dashed area.</h4>
+
+                <label>Images:</label>
+                <button class="btn btn-default" ng-file-select ng-multiple="true" resetOnClick="true" ng-model="files">Select</button>
+                <h4 ng-show="files">Status <small><a href="javascript:void(0)" ng-click="files = null">clear list</a></small></h4>
+                <div class="file" ng-repeat="file in files">
+                    <small>{{file.name}}</small>
+                    <div class="progress" ng-show="file.progress >= 0">
+                        <div class="progress-bar" ng-class="{'progress-bar-danger': file.error}" style="width:{{file.progress}}%">{{file.progress}}%</div>
                     </div>
+                    <button class="button" ng-click="file.upload.abort();file.upload.aborted=true" ng-show="file.upload != null && file.progress < 100 && !file.upload.aborted">Abort</button>
                 </div>
             </div>
-       
+        </div>
+
         <h3 ng-hide="itemFound">Gallery Item not found.</h3>
-        <div ng-show="item" ng-repeat="image in item.images">
-            <img ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(image.transformations) ? image.transformations + '/': ''}}{{image.id}}.{{image.format}}" />
+        
+        <div class="pull-left" style="padding:5px; margin-right:5px; {{(isAdmin)?'border:3px solid gray;':''}}"  ng-show="item" ng-repeat="image in item.images | orderBy:'order'">
+            <img class="thumbnail" ng-src="http://res.cloudinary.com/{{appSettings.cloudName}}/image/upload/{{(image.transformations) ? image.transformations + '/': ''}}{{image.id}}.{{image.format}}" />
             <div ng-show="isAdmin">
                 <div class="form-group">
-                    <label><a href="http://cloudinary.com/documentation/image_transformations#reference" target="_blank">Image Transformations</a>  <small>(comma seperated)</small>
+                    <label><a href="http://cloudinary.com/documentation/image_transformations#reference" target="_blank">Image Transformations</a> <small>(comma seperated)</small>
                     </label>
                     <input type="text" class="form-control" ng-model="image.transformations" />
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" ng-model="image.mainView" />Main View</label>
+                        <input type="checkbox" ng-model="image.mainView" />Primary View</label>
                 </div>
+                <div class="form-group">
+                    <label>Order</label>
+                    <button type="button" ng-click="move(image.order, 'up')" ng-show="item.images.length > 1 && image.order > 0" class="btn btn-default"><i class="glyphicon glyphicon-arrow-up"></i>
+                    </button>
+                    <button type="button" ng-click="move(image.order, 'down')" ng-show="item.images.length > 1 && image.order < item.images.length-1" class="btn btn-default"><i class="glyphicon glyphicon-arrow-down"></i>
+                    </button>
+                </div>
+                <button type="button" ng-click="delete(image)" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </div>
@@ -69,17 +78,11 @@
                 <textarea rows="5" name="description" class="form-control" ng-model="item.description"></textarea>
             </div>
 
-            
-
-
-
-
             <div class="form-group">
                 <label>Categories <small>(comma seperated)</small>
                 </label>
                 <input type="text" name="categoriesString" class="form-control" ng-model="item.categoriesString" />
             </div>
-
 
             <div class="form-group">
                 <label>Quantity On Hand</label>
@@ -90,7 +93,6 @@
                 <label>Price</label>
                 <input type="number" name="price" class="form-control" ng-model="item.price" />
             </div>
-
 
             <div class="form-group">
                 <label>Sale Price</label>

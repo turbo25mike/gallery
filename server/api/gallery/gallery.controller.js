@@ -83,7 +83,7 @@ exports.update = function (req, res) {
         if (!gallery) {
             return res.send(404);
         }
-        var updated = _.merge(gallery, req.body);
+        var updated = _.extend(gallery, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
@@ -92,6 +92,7 @@ exports.update = function (req, res) {
         });
     });
 };
+
 
 // Deletes a gallery from the DB.
 exports.destroy = function (req, res) {

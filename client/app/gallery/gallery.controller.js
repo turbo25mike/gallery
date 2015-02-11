@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('scottsAppApp')
-    .controller('GalleryCtrl', function ($scope, gallery, Auth, $upload, appSettings) {
-        $scope.message = 'Hello';
-
+    .controller('GalleryCtrl', function ($scope, gallery, Auth, $upload, appSettings, cloudinary) {
+    
+        $scope.cloudinary = cloudinary;
         $scope.appSettings = appSettings;
         $scope.filters = [];
         $scope.isAdmin = Auth.isAdmin();
@@ -33,7 +33,7 @@ angular.module('scottsAppApp')
             });
         });
 
-        $scope.searchByCategory = function(category) {
+        $scope.searchByCategory = function (category) {
             $scope.search = category;
         };
     });

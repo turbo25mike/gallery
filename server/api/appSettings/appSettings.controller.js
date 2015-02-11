@@ -7,8 +7,8 @@ var config = require('../../config/environment');
 exports.index = function (req, res) {
 
     return res.json(200, {
-        googleID: config.analytics.googleID,
-        facebookID: config.facebook.clientID,
+        google: config.google,
+        facebook_id: config.facebook.clientID,
         facebookPage: config.facebook.page,
         appName: config.app.name,
         cloudName: config.cloudinary.cloud_name,

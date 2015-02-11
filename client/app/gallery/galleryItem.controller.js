@@ -8,7 +8,9 @@ angular.module('scottsAppApp')
         $scope.appSettings = appSettings;
         $scope.isAdmin = Auth.isAdmin();
         $scope.itemFound = false;
-        $scope.item = { images: []};
+        $scope.item = {
+            images: []
+        };
 
         if ($routeParams.id === 'new') {
             $scope.isNew = true;
@@ -54,20 +56,22 @@ angular.module('scottsAppApp')
                     description: form.description.$modelValue,
                     price: form.price.$modelValue,
                     salePrice: form.salePrice.$modelValue,
+                    images: $scope.item.images,
                     quantity: form.quantity.$modelValue,
-                    commissionOnly: form.commissionOnly.$modelValue,
                     displayOnHome: form.displayOnHome.$modelValue,
                     active: form.active.$modelValue,
                     category: (form.categoriesString.$modelValue) ? form.categoriesString.$modelValue.split(',') : []
                 };
 
                 if ($scope.item._id) {
-                    gallery.update(saveData,
+                    gallery.update(
+                        saveData,
                         function () {
                             toastr.success('Item Saved.');
                         });
                 } else {
-                    gallery.save(saveData,
+                    gallery.save(
+                        saveData,
                         function () {
                             toastr.success('Item Saved.');
                         });
@@ -81,6 +85,8 @@ angular.module('scottsAppApp')
             }
             $scope.files.forEach(function (file) {
                 $scope.upload = $upload.upload({
+                    id: Auth.getCurrentUser()._id
+                }, {
                     url: 'api/gallery/upload',
                     data: {},
                     file: file
@@ -91,15 +97,16 @@ angular.module('scottsAppApp')
                         $scope.$apply();
                     }
                 }).success(function (data) {
-                    if(!data.error){
-                    $scope.item.images.push({
-                        id: data.public_id,
-                        format: data.format,
-                        order: $scope.item.images.length
-                    });
-                    }else{
+                    if (!data.error) {
+                        $scope.item.images.push({
+                            id: data.public_id,
+                            format: data.format,
+                            order: $scope.item.images.length || 0,
+                            transformations: 'w_300,h_300'
+                        });
+                    } else {
                         file.error = true;
-                     toastr.error("failed to upload [" + file.name + "] error: " + data.error.code);   
+                        toastr.error("failed to upload [" + file.name + "] error: " + data.error.code);
                     }
                 });
             });
@@ -119,5 +126,40 @@ angular.module('scottsAppApp')
                 hasFile = true;
             }
             return hasFile ? 'dragover' : 'dragover-err';
+        };
+
+        $scope.move = function (itemOrder, direction) {
+            if (direction === 'up') {
+                angular.forEach($scope.item.images, function (image) {
+                    if (image.order === itemOrder) {
+                        image.order--;
+                    } else if (image.order === itemOrder - 1) {
+                        image.order++;
+                    }
+                });
+            } else {
+                angular.forEach($scope.item.images, function (image) {
+                    if (image.order === itemOrder) {
+                        image.order++;
+                    } else if (image.order === itemOrder + 1) {
+                        image.order--;
+                    }
+                });
+            }
+        };
+
+        $scope.delete = function (image) {
+            var foundIndex = null;
+            for (var i = 0; i < $scope.item.images.length; i++) {
+                if ($scope.item.images[i].id === image.id) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            if (foundIndex !== null) {
+                $scope.item.images.splice(foundIndex, 1);
+                toastr.success('Your image has been removed.  Please remember to save this change to apply.');
+            }
+
         };
     });
