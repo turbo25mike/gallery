@@ -85,8 +85,6 @@ angular.module('scottsAppApp')
             }
             $scope.files.forEach(function (file) {
                 $scope.upload = $upload.upload({
-                    id: Auth.getCurrentUser()._id
-                }, {
                     url: 'api/gallery/upload',
                     data: {},
                     file: file
