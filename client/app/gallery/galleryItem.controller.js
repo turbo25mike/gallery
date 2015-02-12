@@ -44,11 +44,13 @@ angular.module('scottsAppApp')
         $scope.createGallery = function (form) {
             $scope.submitted = true;
 
-            if (!$scope.item.images || $scope.item.images.length < 1) {
-                return;
-            }
-
             if (form.$valid && Auth.isAdmin()) {
+
+                if ($scope.item.images.length === 0) {
+                    toastr.warning('An image is required.');
+                    return;
+                }
+
                 var saveData = {
                     _id: $scope.item._id,
                     title: form.title.$modelValue,

@@ -13,8 +13,8 @@ router.get('/home', controller.homeGallery);
 router.get('/:id', controller.show);
 router.post('/upload', multipartyMiddleware, auth.hasRole('admin'), controller.uploadImage);
 router.post('/', auth.hasRole('admin'), controller.create);
-router.put('/', auth.hasRole('admin'), controller.update);
-router.patch('/', auth.hasRole('admin'), controller.update);
-router.delete('/', auth.hasRole('admin'), controller.destroy);
+router.put('/:id', auth.hasRole('admin'), controller.update);
+router.patch('/:id', auth.hasRole('admin'), controller.update);
+router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 module.exports = router;

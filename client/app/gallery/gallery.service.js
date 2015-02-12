@@ -7,14 +7,10 @@ angular.module('scottsAppApp')
             id: '@_id'
         }, {
             create: {
-                method: 'POST',
-                params: {
-                }
+                method: 'POST'
             },
             update: {
-                method: 'PUT',
-                params: {
-                }
+                method: 'PUT'
             },
             get: {
                 method: 'GET',
