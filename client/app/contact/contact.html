@@ -1,9 +1,7 @@
 <div class="row">
-    <div class="col-sm-12">
-      <h1>Contact Us</h1>
-    </div>
     <div class="col-sm-6">
-      <form class="form" name="form" ng-submit="send(form)" novalidate>
+      <h1>Send us a message.</h1>
+        <form class="form" name="form" ng-submit="send(form)" novalidate>
 
           
           <div class="form-group">
@@ -54,6 +52,10 @@
       </form>
     </div>
       <div class="col-sm-6">
+          <h2>Or give us a call at {{contact.phone}}</h2>
+          <h3>We are located at: </h3>
+          <h4>{{contact.address}}</h4>
+          <h4>{{contact.city}}, {{contact.state}} {{contact.zip}}</h4>
           <google></google>
       </div>
   </div>

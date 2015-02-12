@@ -19,7 +19,7 @@ angular.module('scottsAppApp')
                     };
                     
                     var script = '<script src="http://maps.googleapis.com/maps/api/js?key=' + appSettings.google.map_id + '&callback=initializeGoogleMap"></script>';
-                    script += '<div id="map-canvas" style="width: 100%; height: 400px"></div>';
+                    script += '<div id="map-canvas" style="width: 100%; height: 350px"></div>';
                     scope.apiScript = $sce.trustAsHtml(script);
                         
                     });
