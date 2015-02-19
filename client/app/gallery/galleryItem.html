@@ -51,6 +51,9 @@
             <h3 ng-show="item.quantity > 0 && item.salePrice">Sale: ${{item.salePrice}} <br /><small>reg: ${{item.price}}</small></h3>
             <button ng-show="item.quantity < 1" class="btn btn-primary">Order Now</button>
             <paypal item="item"></paypal>
+            <form ng-show="orderNow" ng-submit="submitOrder(form)">
+            
+            </form>
         </div>
 
 
